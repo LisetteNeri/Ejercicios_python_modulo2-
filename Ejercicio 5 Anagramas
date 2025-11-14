@@ -1,0 +1,31 @@
+# Programa para verificar si dos textos son anagramas
+
+import string
+
+# Solicitar textos al usuario
+texto1 = input("Ingresa el primer texto: ")
+texto2 = input("Ingresa el segundo texto: ")
+
+# Verificación de acentos
+acentos = "áéíóúÁÉÍÓÚ"
+if any(c in acentos for c in texto1) or any(c in acentos for c in texto2):
+    print("Precaución: El uso de acentos podría generar un resultado no deseado.")
+
+# Regla: dos cadenas vacías NO son anagramas
+if texto1.strip() == "" or texto2.strip() == "":
+    print("Los textos NO son anagramas (uno o ambos están vacíos).")
+else:
+    # Normalizar textos: convertir a minúsculas y eliminar espacios
+    t1 = texto1.lower().replace(" ", "")
+    t2 = texto2.lower().replace(" ", "")
+
+    # Eliminar signos de puntuación
+    tabla = str.maketrans("", "", string.punctuation)
+    t1 = t1.translate(tabla)
+    t2 = t2.translate(tabla)
+
+    # Verificar si son anagramas comparando letras ordenadas
+    if sorted(t1) == sorted(t2):
+        print("Los textos son anagramas.")
+    else:
+        print("Los textos NO son anagramas.")
