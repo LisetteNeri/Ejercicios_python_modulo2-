@@ -1,0 +1,28 @@
+class QueueError(IndexError):
+    pass
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def put(self, elem):
+        # Agregar al inicio de la lista
+        self.queue.insert(0, elem)
+
+    def get(self):
+        # Sacar del final de la lista
+        if len(self.queue) == 0:
+            raise QueueError("Queue error")
+        return self.queue.pop()
+
+# Ejemplo de uso
+que = Queue()
+que.put(1)
+que.put("perro")
+que.put(False)
+
+try:
+    for i in range(4):  # Intentamos sacar 4 elementos, aunque hay 3
+        print(que.get())
+except QueueError:
+    print("Queue error")
